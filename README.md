@@ -58,6 +58,19 @@ Funciona direitinho no computador 💻 e no celular 📱, com uma carinha simple
   - **HTML** 📝: Tabelas e rodapé.
   - **CSS** 🎨: Estilos + adaptação pra celular (muda em 768px).
   - **JavaScript** ⚡: Funções `formatarDinheiro` (pra R$) e `atualizarCalculos` (faz as contas).
+## Palavras-Chave
+
+- Cálculo de Prejuízo  
+- Prejuízo de Carga  
+- Prejuízo de Frete  
+- Peso Total  
+- Valor Total  
+- Peso Descarregado  
+- Frete por Tonelada  
+- Calculadora Online  
+- Desenvolvimento Web  
+- Ferramenta Financeira  
+- Transporte e Logística
 
 ## 👨‍💻 Quem fez?
 
