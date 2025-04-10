@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Prejuízo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap; /* Permite que os itens quebrem em telas menores */
+        }
+        .table-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 45%;
+            margin-bottom: 20px; /* Espaço entre tabelas quando empilhadas */
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #555;
+        }
+        .editable {
+            border: 2px solid #4CAF50;
+            padding: 5px;
+            width: 100px;
+            text-align: right;
+        }
+        .result {
+            font-weight: bold;
+            color: #d32f2f;
+        }
+        p {
+            text-align: center;
+            font-style: italic;
+            color: #777;
+            margin-bottom: 20px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        footer a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+        footer a:hover {
+            color: #4CAF50;
+        }
+
+        /* Media Query para dispositivos móveis (largura máxima de 768px) */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Empilha as tabelas */
+                align-items: center;
+            }
+            .table-container {
+                width: 100%; /* Tabelas ocupam toda a largura */
+                max-width: 500px; /* Limita a largura máxima em mobile */
+            }
+            .editable {
+                width: 80px; /* Reduz o tamanho dos inputs em mobile */
+            }
+            th, td {
+                padding: 8px; /* Reduz o padding para economizar espaço */
+                font-size: 14px; /* Reduz a fonte para melhor ajuste */
+            }
+            footer {
+                font-size: 14px; /* Reduz o tamanho da fonte no rodapé */
+            }
+            footer a {
+                font-size: 16px; /* Ajusta o tamanho dos ícones/links */
+                margin: 0 5px; /* Reduz o espaçamento entre links */
+            }
+        }
+    </style>
+</head>
+<body>
+    <p>OBSERVAÇÃO: ALTERAR SOMENTE OS VALORES (Peso Total) (Valor Total) (Peso Descarregado) na Planilha</p>
+    <div class="container">
+        <div class="table-container">
+            <h2>Cálculo de Prejuízo CARGA</h2>
+            <table>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                </tr>
+                <tr>
+                    <td>Peso Total (Peso)</td>
+                    <td><input type="number" id="pesoTotalCarga" class="editable" value="49620" step="0.01"></td>
+                </tr>
+                <tr>
+                    <td>Valor Total (NF)</td>
+                    <td><input type="number" id="valorTotal" class="editable" value="118674.5" step="0.01"></td>
+                </tr>
+                <tr>
+                    <td>Peso Descarregado</td>
+                    <td><input type="number" id="pesoDescarregado" class="editable" value="24740" step="0.01"></td>
+                </tr>
+                <tr>
+                    <td>Diferença</td>
+                    <td id="diferencaCarga">24880</td>
+                </tr>
+                <tr>
+                    <td>Valor Unitário</td>
+                    <td id="valorUnitario">2.39</td>
+                </tr>
+                <tr>
+                    <td class="result">Prejuízo</td>
+                    <td id="prejuizoCarga" class="result">R$ 59504.67</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="table-container">
+            <h2>Cálculo de Prejuízo FRETE</h2>
+            <table>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                </tr>
+                <tr>
+                    <td>Frete Empresa</td>
+                    <td><input type="number" id="freteEmpresa" class="editable" value="12901.2" step="0.01"></td>
+                </tr>
+                <tr>
+                    <td>Peso Total</td>
+                    <td><input type="number" id="pesoTotalFrete" class="editable" value="49620" step="0.01"></td>
+                </tr>
+                <tr>
+                    <td>Frete P/Ton</td>
+                    <td><input type="number" id="fretePorTonelada" class="editable" value="260" step="0.01"></td>
+                </tr>
+                <tr>
+                    <td>Frete a ser cobrado</td>
+                    <td id="freteCobrado">6432.4</td>
+                </tr>
+                <tr>
+                    <td class="result">Prejuízo</td>
+                    <td id="prejuizoFrete" class="result">R$ 6468.80</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>Criado por Gabriel Belitz Baldez</p>
+        <a href="https://www.linkedin.com/in/gabriel-baldez-6a7847217/" target="_blank">🔗 LinkedIn</a>
+        <a href="https://github.com/GabrielBBaldez" target="_blank">🐙 GitHub</a>
+    </footer>
+
+    <script>
+        // Função para formatar como dinheiro
+        function formatarDinheiro(valor) {
+            return `R$ ${valor.toFixed(2)}`;
+        }
+
+        // Função para atualizar os cálculos
+        function atualizarCalculos() {
+            // Obtendo valores editáveis
+            const pesoTotalCarga = parseFloat(document.getElementById('pesoTotalCarga').value) || 0;
+            const valorTotal = parseFloat(document.getElementById('valorTotal').value) || 0;
+            const pesoDescarregado = parseFloat(document.getElementById('pesoDescarregado').value) || 0;
+            const freteEmpresa = parseFloat(document.getElementById('freteEmpresa').value) || 0;
+            const pesoTotalFrete = parseFloat(document.getElementById('pesoTotalFrete').value) || 0;
+            const fretePorTonelada = parseFloat(document.getElementById('fretePorTonelada').value) || 0;
+
+            // Cálculos para Carga
+            const diferencaCarga = pesoTotalCarga - pesoDescarregado;
+            const valorUnitario = pesoTotalCarga !== 0 ? valorTotal / pesoTotalCarga : 0;
+            const prejuizoCarga = diferencaCarga * valorUnitario;
+
+            // Cálculos para Frete
+            const freteCobrado = (pesoDescarregado * fretePorTonelada) / 1000;
+            const prejuizoFrete = freteEmpresa - freteCobrado;
+
+            // Atualizando os campos na tela
+            document.getElementById('diferencaCarga').innerText = diferencaCarga.toFixed(2);
+            document.getElementById('valorUnitario').innerText = valorUnitario.toFixed(2);
+            document.getElementById('prejuizoCarga').innerText = formatarDinheiro(prejuizoCarga);
+            document.getElementById('freteCobrado').innerText = freteCobrado.toFixed(2);
+            document.getElementById('prejuizoFrete').innerText = formatarDinheiro(prejuizoFrete);
+        }
+
+        // Adiciona eventos de input aos campos editáveis
+        const editables = document.querySelectorAll('.editable');
+        editables.forEach(input => {
+            input.addEventListener('input', atualizarCalculos);
+        });
+
+        // Executa os cálculos iniciais
+        atualizarCalculos();
+    </script>
+</body>
+</html>
