@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cálculo de Prejuízo</title>
+    <title>Cálculo de Prejuízo com ICMS</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,7 +15,7 @@
             justify-content: space-around;
             max-width: 1200px;
             margin: 0 auto;
-            flex-wrap: wrap; /* Permite que os itens quebrem em telas menores */
+            flex-wrap: wrap;
         }
         .table-container {
             background-color: #fff;
@@ -23,11 +23,24 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 45%;
-            margin-bottom: 20px; /* Espaço entre tabelas quando empilhadas */
+            margin-bottom: 20px;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 300px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 24px;
         }
         h2 {
             text-align: center;
             color: #333;
+            font-size: 20px;
         }
         table {
             width: 100%;
@@ -47,6 +60,7 @@
             padding: 5px;
             width: 100px;
             text-align: right;
+            font-size: 14px;
         }
         .result {
             font-weight: bold;
@@ -57,59 +71,117 @@
             font-style: italic;
             color: #777;
             margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .description {
+            text-align: center;
+            color: #555;
+            margin-bottom: 20px;
+            font-size: 14px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .usage-guide {
+            text-align: left;
+            color: #555;
+            margin: 20px auto;
+            font-size: 14px;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .usage-guide h3 {
+            margin-top: 0;
+            color: #333;
+            font-size: 16px;
+        }
+        .usage-guide ol {
+            margin: 0;
+            padding-left: 20px;
         }
         footer {
             text-align: center;
+            padding: 20px;
             margin-top: 20px;
-            padding: 10px;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             max-width: 1200px;
-            margin: 20px auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        footer p {
+            margin: 0;
+            color: #333;
         }
         footer a {
-            text-decoration: none;
-            color: #333;
             margin: 0 10px;
-            font-size: 20px;
+            text-decoration: none;
+            color: #4CAF50;
+            font-size: 14px;
         }
         footer a:hover {
-            color: #4CAF50;
+            text-decoration: underline;
         }
 
-        /* Media Query para dispositivos móveis (largura máxima de 768px) */
+        /* Media Query para telas menores (ex.: celulares) */
         @media (max-width: 768px) {
             .container {
-                flex-direction: column; /* Empilha as tabelas */
+                flex-direction: column;
                 align-items: center;
             }
             .table-container {
-                width: 100%; /* Tabelas ocupam toda a largura */
-                max-width: 500px; /* Limita a largura máxima em mobile */
+                width: 90%;
+            }
+            .logo {
+                max-width: 200px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+            h2 {
+                font-size: 18px;
             }
             .editable {
-                width: 80px; /* Reduz o tamanho dos inputs em mobile */
+                width: 80px;
+                font-size: 12px;
             }
             th, td {
-                padding: 8px; /* Reduz o padding para economizar espaço */
-                font-size: 14px; /* Reduz a fonte para melhor ajuste */
+                padding: 8px;
+                font-size: 12px;
+            }
+            p, .description, .usage-guide, .usage-guide h3, .usage-guide ol {
+                font-size: 12px;
+            }
+            .usage-guide {
+                margin: 20px 10px;
+                padding: 10px;
+            }
+            .usage-guide h3 {
+                font-size: 14px;
             }
             footer {
-                font-size: 14px; /* Reduz o tamanho da fonte no rodapé */
+                padding: 15px;
             }
             footer a {
-                font-size: 16px; /* Ajusta o tamanho dos ícones/links */
-                margin: 0 5px; /* Reduz o espaçamento entre links */
+                display: inline-block;
+                margin: 5px 10px;
+                font-size: 12px;
             }
         }
     </style>
 </head>
 <body>
-    <p>OBSERVAÇÃO: ALTERAR SOMENTE OS VALORES (Peso Total) (Valor Total) (Peso Descarregado) na Planilha</p>
+    <img src="logo-bms-seguros.png" alt="Logo BMS Seguros" class="logo">
+    <h1>Ferramenta de Cálculo de Prejuízo</h1>
+    <p>Altere somente os campos: Peso Total, Valor Total, Peso Descarregado e Alíquota ICMS.</p>
+    <div class="description">Esta calculadora ajuda a determinar o prejuízo em operações de carga e frete. Com base no peso total, valor total, peso descarregado e alíquota de ICMS, ela calcula automaticamente o valor do imposto, o prejuízo com e sem ICMS para a carga, e o prejuízo do frete, oferecendo uma visão clara dos custos envolvidos.</div>
     <div class="container">
         <div class="table-container">
-            <h2>Cálculo de Prejuízo CARGA</h2>
+            <h2>Cálculo de Prejuízo CARGA (com ICMS)</h2>
             <table>
                 <tr>
                     <th>Descrição</th>
@@ -120,7 +192,7 @@
                     <td><input type="number" id="pesoTotalCarga" class="editable" value="49620" step="0.01"></td>
                 </tr>
                 <tr>
-                    <td>Valor Total (NF)</td>
+                    <td>Valor Total (NF com ICMS)</td>
                     <td><input type="number" id="valorTotal" class="editable" value="118674.5" step="0.01"></td>
                 </tr>
                 <tr>
@@ -128,16 +200,36 @@
                     <td><input type="number" id="pesoDescarregado" class="editable" value="24740" step="0.01"></td>
                 </tr>
                 <tr>
+                    <td>Alíquota ICMS (%)</td>
+                    <td><input type="number" id="aliquotaICMS" class="editable" value="17" step="0.01" min="0" max="100"></td>
+                </tr>
+                <tr>
+                    <td>Base de Cálculo (sem ICMS)</td>
+                    <td id="baseCalculo">101427.35</td>
+                </tr>
+                <tr>
+                    <td>ICMS</td>
+                    <td id="icms">17242.65</td>
+                </tr>
+                <tr>
                     <td>Diferença</td>
                     <td id="diferencaCarga">24880</td>
                 </tr>
                 <tr>
-                    <td>Valor Unitário</td>
-                    <td id="valorUnitario">2.39</td>
+                    <td>Valor Unitário (sem ICMS)</td>
+                    <td id="valorUnitarioSemICMS">2.04</td>
                 </tr>
                 <tr>
-                    <td class="result">Prejuízo</td>
-                    <td id="prejuizoCarga" class="result">R$ 59504.67</td>
+                    <td>Valor Unitário (com ICMS)</td>
+                    <td id="valorUnitarioComICMS">2.39</td>
+                </tr>
+                <tr>
+                    <td class="result">Prejuízo (sem ICMS)</td>
+                    <td id="prejuizoCargaSemICMS" class="result">R$ 50826.24</td>
+                </tr>
+                <tr>
+                    <td class="result">Prejuízo (com ICMS)</td>
+                    <td id="prejuizoCargaComICMS" class="result">R$ 59504.67</td>
                 </tr>
             </table>
         </div>
@@ -151,7 +243,7 @@
                 </tr>
                 <tr>
                     <td>Frete Empresa</td>
-                    <td><input type="number" id="freteEmpresa" class="editable" value="12901.2" step="0.01"></td>
+                    <td id="freteEmpresa">12901.2</td>
                 </tr>
                 <tr>
                     <td>Peso Total</td>
@@ -159,7 +251,7 @@
                 </tr>
                 <tr>
                     <td>Frete P/Ton</td>
-                    <td><input type="number" id="fretePorTonelada" class="editable" value="260" step="0.01"></td>
+                    <td id="fretePorTonelada">260</td>
                 </tr>
                 <tr>
                     <td>Frete a ser cobrado</td>
@@ -173,10 +265,19 @@
         </div>
     </div>
 
+    <div class="usage-guide">
+        <h3>Como usar a calculadora:</h3>
+        <ol>
+            <li>Insira o peso total da carga, o valor total da nota fiscal (com ICMS), o peso descarregado e a alíquota de ICMS (em %) nos campos editáveis.</li>
+            <li>Os valores de prejuízo para carga (com e sem ICMS) e frete serão calculados automaticamente.</li>
+            <li>Ajuste os valores conforme necessário para ver os resultados atualizados em tempo real.</li>
+        </ol>
+    </div>
+
     <footer>
-        <p>Criado por Gabriel Belitz Baldez</p>
-        <a href="https://www.linkedin.com/in/gabriel-baldez-6a7847217/" target="_blank">🔗 LinkedIn</a>
-        <a href="https://github.com/GabrielBBaldez" target="_blank">🐙 GitHub</a>
+        <p>Criada por BMS Seguros</p>
+        <a href="https://www.linkedin.com/in/gabriel-baldez-6a7847217/" target="_blank">🔗 LinkedIn do Programador</a>
+        <a href="https://www.linkedin.com/company/bms-seguros/?originalSubdomain=br" target="_blank">🏢 BMS Seguros</a>
     </footer>
 
     <script>
@@ -191,23 +292,36 @@
             const pesoTotalCarga = parseFloat(document.getElementById('pesoTotalCarga').value) || 0;
             const valorTotal = parseFloat(document.getElementById('valorTotal').value) || 0;
             const pesoDescarregado = parseFloat(document.getElementById('pesoDescarregado').value) || 0;
-            const freteEmpresa = parseFloat(document.getElementById('freteEmpresa').value) || 0;
+            const aliquotaICMS = parseFloat(document.getElementById('aliquotaICMS').value) / 100 || 0;
             const pesoTotalFrete = parseFloat(document.getElementById('pesoTotalFrete').value) || 0;
-            const fretePorTonelada = parseFloat(document.getElementById('fretePorTonelada').value) || 0;
+            const fretePorTonelada = parseFloat(document.getElementById('fretePorTonelada').innerText) || 0;
+            const freteEmpresa = parseFloat(document.getElementById('freteEmpresa').innerText) || 0;
+
+            // Cálculo do ICMS (por dentro, alíquota dinâmica)
+            const fatorICMS = 1 - aliquotaICMS;
+            const baseCalculo = fatorICMS !== 0 ? valorTotal / fatorICMS : valorTotal;
+            const icms = baseCalculo * aliquotaICMS;
+            const valorSemICMS = valorTotal - icms;
 
             // Cálculos para Carga
             const diferencaCarga = pesoTotalCarga - pesoDescarregado;
-            const valorUnitario = pesoTotalCarga !== 0 ? valorTotal / pesoTotalCarga : 0;
-            const prejuizoCarga = diferencaCarga * valorUnitario;
+            const valorUnitarioSemICMS = pesoTotalCarga !== 0 ? valorSemICMS / pesoTotalCarga : 0;
+            const valorUnitarioComICMS = pesoTotalCarga !== 0 ? valorTotal / pesoTotalCarga : 0;
+            const prejuizoCargaSemICMS = diferencaCarga * valorUnitarioSemICMS;
+            const prejuizoCargaComICMS = diferencaCarga * valorUnitarioComICMS;
 
             // Cálculos para Frete
             const freteCobrado = (pesoDescarregado * fretePorTonelada) / 1000;
             const prejuizoFrete = freteEmpresa - freteCobrado;
 
             // Atualizando os campos na tela
+            document.getElementById('baseCalculo').innerText = baseCalculo.toFixed(2);
+            document.getElementById('icms').innerText = icms.toFixed(2);
             document.getElementById('diferencaCarga').innerText = diferencaCarga.toFixed(2);
-            document.getElementById('valorUnitario').innerText = valorUnitario.toFixed(2);
-            document.getElementById('prejuizoCarga').innerText = formatarDinheiro(prejuizoCarga);
+            document.getElementById('valorUnitarioSemICMS').innerText = valorUnitarioSemICMS.toFixed(2);
+            document.getElementById('valorUnitarioComICMS').innerText = valorUnitarioComICMS.toFixed(2);
+            document.getElementById('prejuizoCargaSemICMS').innerText = formatarDinheiro(prejuizoCargaSemICMS);
+            document.getElementById('prejuizoCargaComICMS').innerText = formatarDinheiro(prejuizoCargaComICMS);
             document.getElementById('freteCobrado').innerText = freteCobrado.toFixed(2);
             document.getElementById('prejuizoFrete').innerText = formatarDinheiro(prejuizoFrete);
         }
