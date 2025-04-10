@@ -1,6 +1,6 @@
 
 # 🚛 Calculadora de Prejuízo de Carga e Frete 💰
-
+Você pode fazer o teste aqui: [Clique aqui para testar](https://precious-arithmetic-be191f.netlify.app/)
 ## 🌟 O que é isso?
 
 Oi! Esse é um projetinho web super legal que eu criei pra calcular o **prejuízo** em operações de carga e frete. Ele usa valores como peso total, valor total, peso descarregado, frete da empresa e frete por tonelada pra te ajudar a entender quanto você perdeu (ou não!). Tudo é atualizado na hora, tipo mágica! ✨
