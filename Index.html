@@ -130,7 +130,7 @@
         }
         footer a:hover {
             text-decoration: underline;
-            color: #45a049; /* Cor mais escura ao passar o mouse */
+            color: #45a049;
         }
         footer a i {
             margin-right: 5px;
@@ -200,28 +200,28 @@
                     <th>Valor</th>
                 </tr>
                 <tr>
-                    <td>Peso Total (Peso)</td>
-                    <td><input type="number" id="pesoTotalCarga" class="editable" value="49620" step="0.01"></td>
+                    <td>Peso Total (KG)</td>
+                    <td><input type="number" id="pesoTotalCarga" class="editable" value="49620" step="0.01" onkeypress="return restrictInput(event)"></td>
                 </tr>
                 <tr>
                     <td>Valor Total (NF com ICMS)</td>
-                    <td><input type="number" id="valorTotal" class="editable" value="118674.5" step="0.01"></td>
+                    <td><input type="number" id="valorTotal" class="editable" value="118674.5" step="0.01" onkeypress="return restrictInput(event)"></td>
                 </tr>
                 <tr>
-                    <td>Peso Descarregado</td>
-                    <td><input type="number" id="pesoDescarregado" class="editable" value="24740" step="0.01"></td>
+                    <td>Peso Descarregado (KG)</td>
+                    <td><input type="number" id="pesoDescarregado" class="editable" value="24740" step="0.01" onkeypress="return restrictInput(event)"></td>
                 </tr>
                 <tr>
                     <td>Alíquota ICMS (%)</td>
-                    <td><input type="number" id="aliquotaICMS" class="editable" value="17" step="0.01" min="0" max="100"></td>
+                    <td><input type="number" id="aliquotaICMS" class="editable" value="17" step="0.01" min="0" max="100" onkeypress="return restrictInput(event)"></td>
                 </tr>
                 <tr>
                     <td>Base de Cálculo (sem ICMS)</td>
-                    <td id="baseCalculo">101427.35</td>
+                    <td id="baseCalculo">R$ 101.427,35</td>
                 </tr>
                 <tr>
                     <td>ICMS</td>
-                    <td id="icms">17242.65</td>
+                    <td id="icms">R$ 17.242,65</td>
                 </tr>
                 <tr>
                     <td>Diferença</td>
@@ -229,19 +229,19 @@
                 </tr>
                 <tr>
                     <td>Valor Unitário (sem ICMS)</td>
-                    <td id="valorUnitarioSemICMS">2.04</td>
+                    <td id="valorUnitarioSemICMS">R$ 2,04</td>
                 </tr>
                 <tr>
                     <td>Valor Unitário (com ICMS)</td>
-                    <td id="valorUnitarioComICMS">2.39</td>
+                    <td id="valorUnitarioComICMS">R$ 2,39</td>
                 </tr>
                 <tr>
                     <td class="result">Prejuízo (sem ICMS)</td>
-                    <td id="prejuizoCargaSemICMS" class="result">R$ 50826.24</td>
+                    <td id="prejuizoCargaSemICMS" class="result">R$ 50.826,24</td>
                 </tr>
                 <tr>
                     <td class="result">Prejuízo (com ICMS)</td>
-                    <td id="prejuizoCargaComICMS" class="result">R$ 59504.67</td>
+                    <td id="prejuizoCargaComICMS" class="result">R$ 59.504,67</td>
                 </tr>
             </table>
         </div>
@@ -255,23 +255,23 @@
                 </tr>
                 <tr>
                     <td>Frete Empresa</td>
-                    <td id="freteEmpresa">12901.2</td>
+                    <td id="freteEmpresa">R$ 12.901,20</td>
                 </tr>
                 <tr>
-                    <td>Peso Total</td>
-                    <td><input type="number" id="pesoTotalFrete" class="editable" value="49620" step="0.01"></td>
+                    <td>Peso Total (KG)</td>
+                    <td><input type="number" id="pesoTotalFrete" class="editable" value="49620" step="0.01" onkeypress="return restrictInput(event)"></td>
                 </tr>
                 <tr>
                     <td>Frete P/Ton</td>
-                    <td id="fretePorTonelada">260</td>
+                    <td id="fretePorTonelada">R$ 260,00</td>
                 </tr>
                 <tr>
                     <td>Frete a ser cobrado</td>
-                    <td id="freteCobrado">6432.4</td>
+                    <td id="freteCobrado">R$ 6.432,40</td>
                 </tr>
                 <tr>
                     <td class="result">Prejuízo</td>
-                    <td id="prejuizoFrete" class="result">R$ 6468.80</td>
+                    <td id="prejuizoFrete" class="result">R$ 6.468,80</td>
                 </tr>
             </table>
         </div>
@@ -294,9 +294,28 @@
     </footer>
 
     <script>
-        // Função para formatar como dinheiro
+        // Função para restringir a entrada de caracteres não numéricos
+        function restrictInput(event) {
+            const charCode = event.charCode;
+            // Permite apenas números (48-57) e ponto (46)
+            if (charCode !== 46 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
+
+        // Função para formatar como dinheiro no padrão brasileiro (ex.: 12.901,20)
         function formatarDinheiro(valor) {
-            return `R$ ${valor.toFixed(2)}`;
+            // Primeiro, arredonda para 2 casas decimais
+            const valorArredondado = valor.toFixed(2);
+            // Separa a parte inteira e decimal
+            const partes = valorArredondado.split('.');
+            let parteInteira = partes[0];
+            const parteDecimal = partes[1];
+            // Adiciona pontos como separadores de milhar
+            parteInteira = parteInteira.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            // Junta as partes com vírgula como separador decimal
+            return `R$ ${parteInteira},${parteDecimal}`;
         }
 
         // Função para atualizar os cálculos
@@ -307,8 +326,8 @@
             const pesoDescarregado = parseFloat(document.getElementById('pesoDescarregado').value) || 0;
             const aliquotaICMS = parseFloat(document.getElementById('aliquotaICMS').value) / 100 || 0;
             const pesoTotalFrete = parseFloat(document.getElementById('pesoTotalFrete').value) || 0;
-            const fretePorTonelada = parseFloat(document.getElementById('fretePorTonelada').innerText) || 0;
-            const freteEmpresa = parseFloat(document.getElementById('freteEmpresa').innerText) || 0;
+            const fretePorTonelada = parseFloat(document.getElementById('fretePorTonelada').innerText.replace('R$ ', '').replace('.', '').replace(',', '.')) || 0;
+            const freteEmpresa = parseFloat(document.getElementById('freteEmpresa').innerText.replace('R$ ', '').replace('.', '').replace(',', '.')) || 0;
 
             // Cálculo do ICMS (por dentro, alíquota dinâmica)
             const fatorICMS = 1 - aliquotaICMS;
@@ -323,19 +342,21 @@
             const prejuizoCargaSemICMS = diferencaCarga * valorUnitarioSemICMS;
             const prejuizoCargaComICMS = diferencaCarga * valorUnitarioComICMS;
 
-            // Cálculos para Frete
+            // Cálculos para Frete (Frete P/Ton é por tonelada, então divide por 1000)
             const freteCobrado = (pesoDescarregado * fretePorTonelada) / 1000;
             const prejuizoFrete = freteEmpresa - freteCobrado;
 
             // Atualizando os campos na tela
-            document.getElementById('baseCalculo').innerText = baseCalculo.toFixed(2);
-            document.getElementById('icms').innerText = icms.toFixed(2);
+            document.getElementById('baseCalculo').innerText = formatarDinheiro(baseCalculo);
+            document.getElementById('icms').innerText = formatarDinheiro(icms);
             document.getElementById('diferencaCarga').innerText = diferencaCarga.toFixed(2);
-            document.getElementById('valorUnitarioSemICMS').innerText = valorUnitarioSemICMS.toFixed(2);
-            document.getElementById('valorUnitarioComICMS').innerText = valorUnitarioComICMS.toFixed(2);
+            document.getElementById('valorUnitarioSemICMS').innerText = formatarDinheiro(valorUnitarioSemICMS);
+            document.getElementById('valorUnitarioComICMS').innerText = formatarDinheiro(valorUnitarioComICMS);
             document.getElementById('prejuizoCargaSemICMS').innerText = formatarDinheiro(prejuizoCargaSemICMS);
             document.getElementById('prejuizoCargaComICMS').innerText = formatarDinheiro(prejuizoCargaComICMS);
-            document.getElementById('freteCobrado').innerText = freteCobrado.toFixed(2);
+            document.getElementById('freteEmpresa').innerText = formatarDinheiro(freteEmpresa);
+            document.getElementById('fretePorTonelada').innerText = formatarDinheiro(fretePorTonelada);
+            document.getElementById('freteCobrado').innerText = formatarDinheiro(freteCobrado);
             document.getElementById('prejuizoFrete').innerText = formatarDinheiro(prejuizoFrete);
         }
 
