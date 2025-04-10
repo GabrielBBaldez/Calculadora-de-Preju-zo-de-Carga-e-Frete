@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cálculo de Prejuízo com ICMS</title>
+    <!-- Adicionando o Font Awesome via CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -118,15 +120,22 @@
             color: #333;
         }
         footer a {
-            margin: 0 10px;
+            margin: 0 15px;
             text-decoration: none;
             color: #4CAF50;
             font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            transition: color 0.3s;
         }
         footer a:hover {
             text-decoration: underline;
+            color: #45a049; /* Cor mais escura ao passar o mouse */
         }
-
+        footer a i {
+            margin-right: 5px;
+            font-size: 16px;
+        }
         /* Media Query para telas menores (ex.: celulares) */
         @media (max-width: 768px) {
             .container {
@@ -167,9 +176,12 @@
                 padding: 15px;
             }
             footer a {
-                display: inline-block;
+                display: inline-flex;
                 margin: 5px 10px;
                 font-size: 12px;
+            }
+            footer a i {
+                font-size: 14px;
             }
         }
     </style>
@@ -276,8 +288,9 @@
 
     <footer>
         <p>Criada por BMS Seguros</p>
-        <a href="https://www.linkedin.com/in/gabriel-baldez-6a7847217/" target="_blank">🔗 LinkedIn do Programador</a>
-        <a href="https://www.linkedin.com/company/bms-seguros/?originalSubdomain=br" target="_blank">🏢 BMS Seguros</a>
+        <a href="https://www.linkedin.com/in/gabriel-baldez-6a7847217/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn do Programador</a>
+        <a href="https://github.com/GabrielBBaldez" target="_blank"><i class="fab fa-github"></i> GitHub do Programador</a>
+        <a href="https://www.linkedin.com/company/bms-seguros/?originalSubdomain=br" target="_blank"><i class="fas fa-building"></i> BMS Seguros</a>
     </footer>
 
     <script>
